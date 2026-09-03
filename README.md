@@ -4,6 +4,12 @@
 
 Microbridge is a tiny local daemon that bridges AI coding agents — ChatGPT, Claude Desktop, Codex CLI, Claude Code, CNVS, Cursor, T3 Code, Synara, Conductor, Factory, OpenCode, and anything else with an integration — to the [Work Louder Codex Micro](https://worklouder.cc/). Per-key RGB mirrors live agent state; keys route only the actions each integration explicitly advertises, so unsupported controls never report false success. No vendor desktop app is required for Microbridge itself.
 
+> **OpenMicro / microkbd users:** this fork adds the real `ACT07`, `ACT08`,
+> `ENC_CC`, `ENC_CW`, and `ENC` wire identifiers emitted by OpenMicro's Codex
+> Micro compatibility firmware. See the bilingual
+> [microkbd setup guide](docs/openmicrokbd-compat.md) for firmware, installation,
+> key mapping, LED colors, verification, and rollback.
+
 > **Status: early public alpha (`v0.3.x`).** Menu bar UI, local daemon, in-process ChatGPT/Codex and Claude Desktop/Claude Code attribution, native CNVS control, and signed macOS packages are shipping. Cursor, Factory, OpenCode, and paired T3 Code control are opt-in and capability-gated. **HID protocol (VID/PID, framing, `v.oai.thstatus`) is implemented from ChatGPT’s Work Louder kit**; hardware control stays off until enabled in Device settings (or `MICROBRIDGE_HID_CLAIM=1` is set for diagnostics) while physical validation is completed. See [docs/device-hid.md](docs/device-hid.md).
 
 ## Screenshots

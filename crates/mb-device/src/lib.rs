@@ -377,14 +377,22 @@ fn hid_key_to_input(key: &str, act: Option<i64>, agent: Option<i64>) -> Option<D
         return Some(DeviceInput::AgentKeyPress { index });
     }
     match key.trim().to_ascii_lowercase().as_str() {
-        "approve" | "accept" | "yes" => Some(DeviceInput::Approve),
-        "reject" | "decline" | "no" => Some(DeviceInput::Reject),
+        // Codex Micro/OpenMicro wire ids are position based. Keep the
+        // descriptive aliases for older/community firmware, while accepting
+        // the ids emitted by the compatibility firmware and the official
+        // device protocol.
+        "approve" | "accept" | "yes" | "act07" => Some(DeviceInput::Approve),
+        "reject" | "decline" | "no" | "act08" => Some(DeviceInput::Reject),
         "interrupt" | "stop" | "cancel" => Some(DeviceInput::Interrupt),
         "new" | "new_session" | "new-session" => Some(DeviceInput::NewSession),
         "cycle" | "focus" | "cycle_focus" => Some(DeviceInput::CycleFocus),
-        "dial_left" | "dial-left" | "dial_ccw" => Some(DeviceInput::DialRotate { delta: -1 }),
-        "dial_right" | "dial-right" | "dial_cw" => Some(DeviceInput::DialRotate { delta: 1 }),
-        "dial" | "dial_press" | "dial-press" => Some(DeviceInput::DialPress),
+        "dial_left" | "dial-left" | "dial_ccw" | "enc_cc" => {
+            Some(DeviceInput::DialRotate { delta: -1 })
+        }
+        "dial_right" | "dial-right" | "dial_cw" | "enc_cw" => {
+            Some(DeviceInput::DialRotate { delta: 1 })
+        }
+        "dial" | "dial_press" | "dial-press" | "enc" => Some(DeviceInput::DialPress),
         "touch" | "touch_tap" | "touch-tap" => Some(DeviceInput::TouchTap),
         _ => None,
     }
@@ -482,6 +490,32 @@ mod tests {
             Some(DeviceInput::AgentKeyPress { index: 5 })
         );
         assert_eq!(hid_key_to_input("agent6", Some(0), Some(5)), None);
+    }
+
+    #[cfg(feature = "hid")]
+    #[test]
+    fn codex_micro_wire_ids_map_to_controls() {
+        assert_eq!(
+            hid_key_to_input("ACT07", Some(1), None),
+            Some(DeviceInput::Approve)
+        );
+        assert_eq!(
+            hid_key_to_input("ACT08", Some(1), None),
+            Some(DeviceInput::Reject)
+        );
+        assert_eq!(
+            hid_key_to_input("ENC_CC", Some(2), None),
+            Some(DeviceInput::DialRotate { delta: -1 })
+        );
+        assert_eq!(
+            hid_key_to_input("ENC_CW", Some(2), None),
+            Some(DeviceInput::DialRotate { delta: 1 })
+        );
+        assert_eq!(
+            hid_key_to_input("ENC", Some(1), None),
+            Some(DeviceInput::DialPress)
+        );
+        assert_eq!(hid_key_to_input("ACT07", Some(0), None), None);
     }
 
     #[test]
