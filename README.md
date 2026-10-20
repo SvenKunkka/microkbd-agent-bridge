@@ -1,3 +1,7 @@
+<!-- SVENKUNKKA-README-NAV:BEGIN -->
+[中文项目说明](#project-overview-zh) · [English overview](#project-overview-en) · [维护者 X / Maintainer on X](https://x.com/Svenu1s5)
+<!-- SVENKUNKKA-README-NAV:END -->
+
 # Microbridge
 
 **An open-source control plane for the Codex Micro — one macropad, every coding agent.**
@@ -178,3 +182,32 @@ Full notes: [ACKNOWLEDGMENTS.md](ACKNOWLEDGMENTS.md).
 ## License
 
 [MIT](LICENSE) licensed — a permissive, OSI-approved open source license. Contributions are accepted under the same terms (inbound = outbound).
+
+
+---
+
+<!-- SVENKUNKKA-PROJECT-INFO:BEGIN -->
+
+<a id="project-overview-zh"></a>
+## 中文项目说明
+
+[DevVig/microbridge](https://github.com/DevVig/microbridge) 的 Fork，通过本地 Rust 守护进程把 AI 编程会话状态与操作连接到 Codex Micro 宏键盘；本 Fork 增加 OpenMicro/microkbd 兼容固件的按键和旋钮标识。
+
+**使用入口：** 安装入口见 [INSTALL.md](INSTALL.md)；OpenMicro 设备请先阅读 [双语兼容指南](docs/openmicrokbd-compat.md)。开发可运行 `cargo test` 与 `cargo run -p microbridged`。
+
+**范围说明：** 项目仍处早期公开 alpha；硬件控制需显式启用，集成只路由已声明支持的动作。它是独立社区项目，非 Work Louder 或 OpenAI 官方产品。
+
+<a id="project-overview-en"></a>
+## English project overview
+
+A fork of [DevVig/microbridge](https://github.com/DevVig/microbridge), linking AI coding-session states and actions to the Codex Micro through a local Rust daemon. This fork adds key and encoder identifiers emitted by OpenMicro/microkbd compatibility firmware.
+
+**Getting started:** See [INSTALL.md](INSTALL.md); OpenMicro users should start with the [bilingual compatibility guide](docs/openmicrokbd-compat.md). For development, use `cargo test` and `cargo run -p microbridged`.
+
+**Scope:** An early public alpha. Hardware control requires explicit enablement, and integrations route only advertised capabilities. It is an independent community project, not an official Work Louder or OpenAI product.
+
+**本 Fork 的维护者 / Maintainer of this fork:** [SvenKunkka](https://github.com/SvenKunkka) · [X / Twitter](https://x.com/Svenu1s5)
+
+**上游项目 / Upstream:** [DevVig/microbridge](https://github.com/DevVig/microbridge)。保留原作者署名与原许可证 / Original authorship and license notices are retained.
+
+<!-- SVENKUNKKA-PROJECT-INFO:END -->
